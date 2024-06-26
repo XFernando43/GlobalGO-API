@@ -8,7 +8,6 @@ namespace data.repository
     public class UnitOfWork: IUnitOfWork
     {
         ApplicationDbContext _db;
-        //public ICategoryRepository categoryRepository { get; set; }
         public ICategoryRepository categoryRepository {get;set;}
         public IBrandRepository brandRepository {get;set;}
         public IDealersRepository dealersRepository { get; set; }
