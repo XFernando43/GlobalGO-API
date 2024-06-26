@@ -3,10 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GlobalGO.Migrations
+namespace data.Migrations
 {
     /// <inheritdoc />
-    public partial class addTables : Migration
+    public partial class addTablesAndInfo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -244,6 +244,21 @@ namespace GlobalGO.Migrations
                         principalColumn: "idModelo",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "Marcas",
+                columns: new[] { "idMarca", "logo", "marca", "rgb" },
+                values: new object[] { 1, "yamaha-logo.png", "Yamaha", "#FF5733" });
+
+            migrationBuilder.InsertData(
+                table: "Modelos",
+                columns: new[] { "idModelo", "idMarca", "logo", "modelo", "rgb", "slogan", "texto", "video" },
+                values: new object[] { 1, 1, "r1-logo.png", "YZF-R1", "#0000FF", "Super Sport", "Lorem ipsum...", "r1-video.mp4" });
+
+            migrationBuilder.InsertData(
+                table: "Colores",
+                columns: new[] { "idColor", "color", "icono", "idModelo" },
+                values: new object[] { 1, "Blue", "blue-icon.png", 1 });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Carruseles_modeloidModelo",

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
 
-namespace GlobalGO.Migrations
+namespace data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
@@ -120,6 +120,15 @@ namespace GlobalGO.Migrations
                     b.HasIndex("idModelo");
 
                     b.ToTable("Colores");
+
+                    b.HasData(
+                        new
+                        {
+                            idColor = 1,
+                            color = "Blue",
+                            icono = "blue-icon.png",
+                            idModelo = 1
+                        });
                 });
 
             modelBuilder.Entity("GlobalGO.models.DistribuidorMotos", b =>
@@ -356,6 +365,15 @@ namespace GlobalGO.Migrations
                     b.HasKey("idMarca");
 
                     b.ToTable("Marcas");
+
+                    b.HasData(
+                        new
+                        {
+                            idMarca = 1,
+                            logo = "yamaha-logo.png",
+                            marca = "Yamaha",
+                            rgb = "#FF5733"
+                        });
                 });
 
             modelBuilder.Entity("GlobalGO.models.Modelos", b =>
@@ -402,6 +420,19 @@ namespace GlobalGO.Migrations
                     b.HasIndex("idMarca");
 
                     b.ToTable("Modelos");
+
+                    b.HasData(
+                        new
+                        {
+                            idModelo = 1,
+                            idMarca = 1,
+                            logo = "r1-logo.png",
+                            modelo = "YZF-R1",
+                            rgb = "#0000FF",
+                            slogan = "Super Sport",
+                            texto = "Lorem ipsum...",
+                            video = "r1-video.mp4"
+                        });
                 });
 
             modelBuilder.Entity("GlobalGO.models.Precios", b =>
