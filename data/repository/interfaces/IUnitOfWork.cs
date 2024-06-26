@@ -17,6 +17,7 @@ namespace data.repository.interfaces
         IModelRepository modelRepository { get; set; }
         IPriceRepository priceRepository { get; set; }
         ISpecificationRepository specificationRepository { get; set; }
+        IDealersXModelRepository dealersXModelRepository { get; set; }
         void Save();
     }
 }

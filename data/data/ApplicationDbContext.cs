@@ -20,6 +20,7 @@ namespace GlobalGO.data
             public DbSet<Marcas> Marcas { get; set; }
             public DbSet<Modelos> Modelos { get; set; }
             public DbSet<Precios> Precios { get; set; }
+            public DbSet<DistribuidorMotos> DistribuidoresMotos { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

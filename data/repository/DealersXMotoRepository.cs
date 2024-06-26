@@ -29,9 +29,8 @@ namespace data.repository
 
         public List<DistribuidorMotos> getDealersXMoto()
         {
-            //List<DistribuidorMotos> listDealersXMoto = 
-            throw new NotImplementedException();
-           
+            List<DistribuidorMotos> listDealersXMoto = _db.DistribuidoresMotos.ToList();
+            return listDealersXMoto;
         }
 
         public void Save()
