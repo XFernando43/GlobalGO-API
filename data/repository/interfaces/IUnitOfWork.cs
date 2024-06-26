@@ -9,6 +9,7 @@ namespace data.repository.interfaces
     public interface IUnitOfWork
     {
         ICategoryRepository categoryRepository { get; set; }
+        IBrandRepository brandRepository { get; set; }
         //IProductRepository productRepository { get; set; }
         //IUserRepository userRepository { get; set; }
         //IAuthorizationRepository authorizationRepository { get; set; }
