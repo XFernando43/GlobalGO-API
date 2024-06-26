@@ -8,14 +8,15 @@ namespace data.repository.interfaces
 {
     public interface IUnitOfWork
     {
-        ICategoryRepository categoryRepository { get; set; }
         IBrandRepository brandRepository { get; set; }
-        //IProductRepository productRepository { get; set; }
-        //IUserRepository userRepository { get; set; }
-        //IAuthorizationRepository authorizationRepository { get; set; }
-        //IRolRepository rolRepository { get; set; }
-        //IItemCartRepository itemCartRepository { get; set; }
-        //IShoppingCartRepository shoppingCartRepository { get; set; }
+        ICarouselRepository carouselRepository { get; set; }
+        ICategoryRepository categoryRepository { get; set; }
+        IColorsRepository colorsRepository { get; set; }
+        IDealersRepository dealersRepository { get; set; }
+        IGaleryRepository galeryRepository { get; set; }
+        IModelRepository modelRepository { get; set; }
+        IPriceRepository priceRepository { get; set; }
+        ISpecificationRepository specificationRepository { get; set; }
         void Save();
     }
 }
