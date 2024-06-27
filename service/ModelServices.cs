@@ -1,5 +1,10 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.models;
+using Microsoft.AspNetCore.Http;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
+using System.Collections.Generic;
 
 namespace service
 {
@@ -23,6 +28,51 @@ namespace service
                 return null;
             }
 
+        }
+
+        public async Task SubmitDataByExcel(IFormFile archivoExcel)
+        {
+            if (archivoExcel == null || archivoExcel.Length == 0)
+            {
+                throw new Exception("No se ha proporcionado un archivo valido");
+            }
+
+            try
+            {
+                using (var stream = archivoExcel.OpenReadStream())
+                {
+                    IWorkbook miExcel = null;
+                    if (Path.GetExtension(archivoExcel.FileName).ToLower() == ".xlsx")
+                    {
+                        miExcel = new XSSFWorkbook(stream);
+                    }
+                    else if (Path.GetExtension(archivoExcel.FileName).ToLower() == ".xls")
+                    {
+                        miExcel = new HSSFWorkbook(stream);
+                    }
+                    else
+                    {
+                        throw new Exception("Formato de archivo no soportado");
+                    }
+
+                    ISheet hojaExcel = miExcel.GetSheetAt(0);
+                    int rowCounts = hojaExcel.LastRowNum;
+
+                    for (int i = 0; i <= rowCounts; i++)
+                    {
+                        IRow fila = hojaExcel.GetRow(i);
+                        if (fila == null)
+                        {
+                            continue; // Salta filas vacías
+                        }
+                        Console.WriteLine($"{fila.GetCell(0).ToString()} {fila.GetCell(1).ToString()} {fila.GetCell(2).ToString()} {fila.GetCell(3).ToString()}");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Se produjo un error procesando el archivo");
+            }
         }
         
     }

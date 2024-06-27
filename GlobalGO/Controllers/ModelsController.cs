@@ -1,9 +1,9 @@
 ﻿using data.repository.interfaces;
-using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
+using NPOI.HSSF.UserModel;
+using NPOI.SS.UserModel;
+using NPOI.XSSF.UserModel;
 using service;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GlobalGO.Controllers
 {
@@ -42,7 +42,6 @@ namespace GlobalGO.Controllers
             }
         }
 
-
         [HttpGet("{id}")]
         public string Get(int id)
         {
@@ -53,6 +52,20 @@ namespace GlobalGO.Controllers
         public void Post([FromBody] string value)
         {
         }
+
+        [HttpPost("excel")]
+        //public async Task<IActionResult> UploadByExcel([FromForm] IFormFile archivoExcel)
+        public async Task UploadByExcel([FromForm] IFormFile archivoExcel)
+        {
+            try
+            {
+                await _service.SubmitDataByExcel(archivoExcel);
+            }
+            catch (Exception ex) { 
+                throw new Exception("Algo ocurrio en el servidor");
+            }
+        }
+
 
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)

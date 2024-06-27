@@ -3,7 +3,7 @@
 
 namespace data.repository.interfaces
 {
-    public partial interface IModelRepository: IRepository<Modelos>
+    public partial interface IModelRepository : IRepository<Modelos>
     {
         void AddModels();
         void Update();
