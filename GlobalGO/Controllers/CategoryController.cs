@@ -2,14 +2,20 @@
 using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
+using service;
 
 namespace GlobalGO.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class CategoryController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
-        public CategoryController(IUnitOfWork unitOfWork) { 
+        private readonly CategoryService _categoryService;
+        public CategoryController(IUnitOfWork unitOfWork)
+        {
             _unitOfWork = unitOfWork;
+            _categoryService = new CategoryService(unitOfWork);
         }
 
         [HttpGet("getAll")]
@@ -26,11 +32,11 @@ namespace GlobalGO.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message=ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }

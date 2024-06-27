@@ -33,7 +33,6 @@ namespace GlobalGO.Controllers
             }
             catch (Exception ex)
             {
-                // Manejo de excepciones: aquí puedes registrar el error o tomar alguna acción adicional.
                 return StatusCode(500, new
                 {
                     ok = false,

@@ -1,8 +1,6 @@
 ﻿using data.repository.interfaces;
-using GlobalGO.models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System.Runtime.CompilerServices;
+using service;
 
 namespace GlobalGO.Controllers
 {
@@ -11,30 +9,34 @@ namespace GlobalGO.Controllers
     public class DealersController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly DealerService _dealerService;
         public DealersController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _dealerService = new DealerService(unitOfWork);
         }
         [HttpGet]
-        async public Task<IActionResult> Get(){
+        public async Task<IActionResult> Get()
+        {
             try
             {
-                var listDealers = _unitOfWork.dealersRepository.GetDealers();
+                var listDealers = await _dealerService.getDealers();
                 return Ok(new
                 {
                     Ok = true,
-                    brands = listDealers
+                    dealers = listDealers
                 });
             }
-            catch (Exception ex) {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+            catch (Exception ex)
+            {
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
-        
+
         }
     }
 }

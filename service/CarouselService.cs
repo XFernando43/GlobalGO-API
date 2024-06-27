@@ -21,7 +21,7 @@ namespace service
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                return new List<Carruseles>(); // Devolver una lista vacía en lugar de null
             }
         }
     }

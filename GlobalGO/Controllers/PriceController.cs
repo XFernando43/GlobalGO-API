@@ -1,8 +1,8 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
+using service;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GlobalGO.Controllers
 {
@@ -11,16 +11,18 @@ namespace GlobalGO.Controllers
     public class PriceController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly PriceService _priceService;
         public PriceController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _priceService = new PriceService(unitOfWork);
         }
         [HttpGet]
-        async public Task<IActionResult> Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
-                var listBrands = _unitOfWork.priceRepository.getPrices();
+                var listBrands = await _priceService.getPrecios();
                 return Ok(new
                 {
                     Ok = true,
@@ -29,11 +31,11 @@ namespace GlobalGO.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }

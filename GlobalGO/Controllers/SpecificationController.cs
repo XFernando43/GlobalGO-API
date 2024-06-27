@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
+using service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,30 +12,32 @@ namespace GlobalGO.Controllers
     public class SpecificationController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly SpecificationsService _specificationsService;
         public SpecificationController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _specificationsService = new SpecificationsService(unitOfWork);
         }
 
         [HttpGet]
-        async public Task<IActionResult> getAll()
+        public async Task<IActionResult> getAll()
         {
             try
             {
-                var listSpecifications = _unitOfWork.specificationRepository.getSpecifications();
+                var listSpecifications = await _specificationsService.getSpecifications();
                 return Ok(new
                 {
                     Ok = true,
-                    brands = listSpecifications
+                    specifications = listSpecifications
                 });
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }

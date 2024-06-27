@@ -10,7 +10,7 @@ namespace service
         {
             _unitOfWork = unitOfWork;
         }
-        public async Task<IEnumerable<Distribuidores>> getDistribuidores()
+        public async Task<IEnumerable<Distribuidores>> getDealers()
         {
             try
             {

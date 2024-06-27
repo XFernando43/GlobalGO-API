@@ -4,6 +4,8 @@ using service;
 
 namespace GlobalGO.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class BrandController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -15,7 +17,7 @@ namespace GlobalGO.Controllers
         }
 
 
-        [HttpGet("Brands")]
+        [HttpGet("getAll")]
         public async Task<IActionResult> getBrands()
         {
             try
@@ -29,11 +31,11 @@ namespace GlobalGO.Controllers
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }

@@ -1,8 +1,7 @@
 ﻿using data.repository.interfaces;
-using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
+using service;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace GlobalGO.Controllers
 {
@@ -11,54 +10,53 @@ namespace GlobalGO.Controllers
     public class CarouselController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly CarouselService _carouselService;
         public CarouselController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _carouselService = new CarouselService(unitOfWork);
         }
 
-        [HttpGet]
-        async public Task<IActionResult> GetAll()
+        [HttpGet("getAll")]
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var listCarusels = _unitOfWork.carouselRepository.GetCarruseles();
+                var _carouseles = await _carouselService.getCarouseles();
                 return Ok(new
                 {
-                    Ok = true,
-                        brands = listCarusels
-                    });
-                }
+                    ok = true,
+                    carouseles = _carouseles
+                });
+            }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }
 
-        // GET api/<CarouselController>/5
+
         [HttpGet("{id}")]
         public string Get(int id)
         {
             return "value";
         }
 
-        // POST api/<CarouselController>
         [HttpPost]
         public void Post([FromBody] string value)
         {
         }
 
-        // PUT api/<CarouselController>/5
         [HttpPut("{id}")]
         public void Put(int id, [FromBody] string value)
         {
         }
 
-        // DELETE api/<CarouselController>/5
         [HttpDelete("{id}")]
         public void Delete(int id)
         {

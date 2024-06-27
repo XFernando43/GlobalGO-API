@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
+using service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,30 +12,32 @@ namespace GlobalGO.Controllers
     public class ColorController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly ColorService _colorService;
         public ColorController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _colorService = new ColorService(unitOfWork);
         }
 
-        [HttpGet]
+        [HttpGet("getAll")]
         async public Task<IActionResult> Get()
         {
             try
             {
-                var listColors = _unitOfWork.colorsRepository.getColors();
+                var listColors = _colorService.getColores;
                 return Ok(new
                 {
                     Ok = true,
-                    brands = listColors
+                    colors = listColors
                 });
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }

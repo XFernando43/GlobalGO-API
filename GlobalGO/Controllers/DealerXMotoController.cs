@@ -2,6 +2,7 @@
 using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata;
+using service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,30 +13,32 @@ namespace GlobalGO.Controllers
     public class DealerXMotoController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly DealersxMotoService _dealersxMotoService;
         public DealerXMotoController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _dealersxMotoService = new DealersxMotoService(unitOfWork);
         }
 
         [HttpGet]
-        async public Task<IActionResult> Get()
+        public async Task<IActionResult> Get()
         {
             try
             {
-                var listDealersXMoto = _unitOfWork.dealersXModelRepository.getDealersXMoto();
+                var listDealersXMoto = await _dealersxMotoService.getDealersXMotos();
                 return Ok(new
                 {
                     Ok = true,
-                    brands = listDealersXMoto
+                    dealersXmoto = listDealersXMoto
                 });
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }

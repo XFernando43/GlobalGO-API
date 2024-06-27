@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
+using service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,32 +12,34 @@ namespace GlobalGO.Controllers
     public class GaleryController : ControllerBase
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly GaleryService _galeryService;
         public GaleryController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _galeryService = new GaleryService(unitOfWork);
         }
 
 
 
         [HttpGet]
-        async public Task<IActionResult> GetAll()
+        public async Task<IActionResult> GetAll()
         {
             try
             {
-                var listGalerys = _unitOfWork.galeryRepository.GetGalerias();
+                var listGalerys = await _galeryService.getGaleries();
                 return Ok(new
                 {
                     Ok = true,
-                    brands = listGalerys
+                    galerys = listGalerys
                 });
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.Message);
-                return BadRequest(new
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.Message
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }
