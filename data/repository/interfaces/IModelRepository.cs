@@ -12,7 +12,7 @@ namespace data.repository.interfaces
         void AddModels();
         void Update();
         void Save();
-        List<Modelos> getModels();
+        Task<IEnumerable<Modelos>> getModels();
         void deleteModel(int id);
     }
 }

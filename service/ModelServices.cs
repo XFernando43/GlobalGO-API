@@ -1,11 +1,5 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.models;
-using Microsoft.AspNetCore.Http.HttpResults;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace service
 {
@@ -17,17 +11,11 @@ namespace service
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<IEnumerable<Modelos>> getAll()
+        public async Task<IEnumerable<Modelos>> getModelos()
         {
-            try
-            {
-                List<Modelos> listModels = _unitOfWork.modelRepository.getModels();
-                return listModels;
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            var modelos = await _unitOfWork.modelRepository.getModels();
+            return modelos;
         }
+        
     }
 }

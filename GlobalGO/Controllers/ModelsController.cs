@@ -1,7 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using service;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -12,9 +12,11 @@ namespace GlobalGO.Controllers
     public class ModelsController : ControllerBase
     {
         private readonly IUnitOfWork _db;
+        private readonly ModelServices _service;
         public ModelsController(IUnitOfWork db)
         {
             _db = db;
+            _service = new ModelServices(_db);
         }
 
         [HttpGet]
@@ -22,23 +24,25 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                List<Modelos> ListModels = _db.modelRepository.getModels();
+                var modelos = await _service.getModelos();
                 return Ok(new
                 {
-                    ok=true,
-                    modelos =ListModels
+                    ok = true,
+                    Modelos = modelos,
                 });
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
-                return BadRequest(new
+                // Manejo de excepciones: aquí puedes registrar el error o tomar alguna acción adicional.
+                return StatusCode(500, new
                 {
                     ok = false,
-                    message = ex.ToString()
+                    message = "Se produjo un error interno del servidor.",
+                    error = ex.Message
                 });
             }
         }
+
 
         [HttpGet("{id}")]
         public string Get(int id)

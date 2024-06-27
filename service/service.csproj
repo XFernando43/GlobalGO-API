@@ -16,7 +16,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\data\data.csproj" />
-    <ProjectReference Include="..\GlobalGO\GlobalGO.csproj" />
     <ProjectReference Include="..\models\models.csproj" />
   </ItemGroup>
 

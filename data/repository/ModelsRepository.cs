@@ -3,6 +3,7 @@
 using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
+using Microsoft.EntityFrameworkCore;
 
 namespace data.repository
 {
@@ -24,11 +25,17 @@ namespace data.repository
             throw new NotImplementedException();
         }
 
-        public List<Modelos> getModels()
+        public async Task<IEnumerable<Modelos>> getModels()
         {
-            List<Modelos> ListModels = _db.Modelos.ToList();
-            return ListModels;
+            return await _db.Modelos.ToListAsync();
         }
+
+        //public async List<Modelos> getModels()
+        //{
+        //    //List<Modelos> ListModels = _db.Modelos.ToList();
+        //    //return ListModels;
+        //    return await _db.Modelos.ToListAsync();
+        //}
 
         public void Save()
         {
