@@ -12,7 +12,7 @@ namespace data.repository.interfaces
         void AddGalery();
         void Update();
         void Save();
-        List<Galerias> getGaleries();
+        Task<IEnumerable<Galerias>> GetGalerias();
         void deleteGalery(int id);
     }
 }

@@ -30,13 +30,6 @@ namespace data.repository
             return await _db.Modelos.ToListAsync();
         }
 
-        //public async List<Modelos> getModels()
-        //{
-        //    //List<Modelos> ListModels = _db.Modelos.ToList();
-        //    //return ListModels;
-        //    return await _db.Modelos.ToListAsync();
-        //}
-
         public void Save()
         {
             throw new NotImplementedException();

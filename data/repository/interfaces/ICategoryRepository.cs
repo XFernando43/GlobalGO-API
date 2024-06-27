@@ -8,8 +8,8 @@ namespace data.repository.interfaces
         void AddCategory(CategoryRequest request);
         void Update(int id, CategoryRequest product);
         void Save();
-        List<Categorias> getCategories();
-
+        //List<Categorias> getCategories();
+        Task<IEnumerable<Categorias>> getCategories();  
         void deleteCategory(int id);
     }
 }

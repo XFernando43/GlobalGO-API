@@ -22,7 +22,7 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                List<DistribuidorMotos> listDealersXMoto = _unitOfWork.dealersXModelRepository.getDealersXMoto();
+                var listDealersXMoto = _unitOfWork.dealersXModelRepository.getDealersXMoto();
                 return Ok(new
                 {
                     Ok = true,

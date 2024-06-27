@@ -8,7 +8,7 @@ namespace data.repository.interfaces
         void AddSpecification();
         void Update();
         void Save();
-        List<Especificaciones> getSpecifications();
+        Task<IEnumerable<Especificaciones>> getSpecifications();
         void deleteSpecifications(int id);
     }
 }

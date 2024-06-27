@@ -19,11 +19,11 @@ namespace GlobalGO.Controllers
 
 
         [HttpGet]
-        async public Task<IActionResult> Get()
+        async public Task<IActionResult> GetAll()
         {
             try
             {
-                List<Galerias> listGalerys = _unitOfWork.galeryRepository.getGaleries();
+                var listGalerys = _unitOfWork.galeryRepository.GetGalerias();
                 return Ok(new
                 {
                     Ok = true,

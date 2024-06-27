@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,10 +33,10 @@ namespace data.repository
         {
             throw new NotImplementedException();
         }
-        public List<Marcas> getBrands()
+
+        public async Task<IEnumerable<Marcas>> getBrands()
         {
-            List<Marcas> brandsList = _db.Marcas.ToList();
-            return brandsList;
+            return await _db.Marcas.ToListAsync();
         }
     }
 }

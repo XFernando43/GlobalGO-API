@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
+using Microsoft.EntityFrameworkCore;
 
 namespace data.repository
 {
@@ -22,10 +23,9 @@ namespace data.repository
             throw new NotImplementedException();
         }
 
-        public List<Colores> getColors()
+        public async Task<IEnumerable<Colores>> getColors()
         {
-            List<Colores> ListColors = _db.Colores.ToList();
-            return ListColors;
+            return await _db.Colores.ToListAsync();
         }
 
         public void Save()

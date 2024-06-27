@@ -13,8 +13,8 @@ namespace data.repository.interfaces
         void addCarrousel();
         void Update(int id);
         void Save();
-        List<Carruseles> getCarousels();
-
+        //List<Carruseles> getCarousels();
+        Task<IEnumerable<Carruseles>> GetCarruseles();
         void deleteCarousel(int id);
     }
 }

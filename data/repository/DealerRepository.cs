@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,18 +26,6 @@ namespace data.repository
             throw new NotImplementedException();
         }
 
-        public List<Distribuidores> GetAll()
-        {
-            List<Distribuidores> dealersList = _db.Distribuidores.ToList();
-            return dealersList;
-        }
-
-        public List<Distribuidores> GetDealers()
-        {
-            List<Distribuidores> dealersList = _db.Distribuidores.ToList();
-            return dealersList;
-        }
-
         public void save()
         {
             throw new NotImplementedException();
@@ -45,6 +34,11 @@ namespace data.repository
         public void update(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Distribuidores>> GetDealers()
+        {
+            return await _db.Distribuidores.ToListAsync();
         }
     }
 }

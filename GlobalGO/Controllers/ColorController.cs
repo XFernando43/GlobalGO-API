@@ -21,7 +21,7 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                List<Colores> listColors = _unitOfWork.colorsRepository.getColors();
+                var listColors = _unitOfWork.colorsRepository.getColors();
                 return Ok(new
                 {
                     Ok = true,

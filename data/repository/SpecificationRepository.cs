@@ -1,7 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
-
+using Microsoft.EntityFrameworkCore;
 
 namespace data.repository
 {
@@ -23,10 +23,9 @@ namespace data.repository
             throw new NotImplementedException();
         }
 
-        public List<Especificaciones> getSpecifications()
+        public async Task<IEnumerable<Especificaciones>> getSpecifications()
         {
-            List<Especificaciones> SpecificationsList = _db.Especificaciones.ToList();
-            return SpecificationsList;
+            return await _db.Especificaciones.ToListAsync();
         }
 
         public void Save()

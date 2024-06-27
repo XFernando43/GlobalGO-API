@@ -18,7 +18,7 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                List<Marcas> listBrands = _unitOfWork.brandRepository.getBrands();
+                var listBrands = _unitOfWork.brandRepository.getBrands();
                 return Ok(new
                 {
                     Ok = true,

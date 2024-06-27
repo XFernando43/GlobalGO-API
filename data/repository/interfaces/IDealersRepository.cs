@@ -12,8 +12,8 @@ namespace data.repository.interfaces
         void AddDealers();
         void update(int id);
         void save();
-        List<Distribuidores> GetAll();
-        List<Distribuidores> GetDealers();
+        //List<Distribuidores> GetAll();
+        Task<IEnumerable<Distribuidores>> GetDealers();
         void deleteDealer(int id); 
     }
 }

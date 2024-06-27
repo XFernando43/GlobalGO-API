@@ -21,7 +21,7 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                List<Carruseles> listCarusels = _unitOfWork.carouselRepository.getCarousels();
+                var listCarusels = _unitOfWork.carouselRepository.GetCarruseles();
                 return Ok(new
                 {
                     Ok = true,

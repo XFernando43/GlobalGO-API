@@ -17,7 +17,7 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                List<Categorias> listCategorias = _unitOfWork.categoryRepository.getCategories();
+                var listCategorias = _unitOfWork.categoryRepository.getCategories();
                 return Ok(new
                 {
                     Ok = true,

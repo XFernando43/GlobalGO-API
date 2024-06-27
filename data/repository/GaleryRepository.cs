@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
+using Microsoft.EntityFrameworkCore;
 
 namespace data.repository
 {
@@ -22,10 +23,9 @@ namespace data.repository
             throw new NotImplementedException();
         }
 
-        public List<Galerias> getGaleries()
+        public async Task<IEnumerable<Galerias>> GetGalerias()
         {
-            List<Galerias> ListGalerias = _db.Galerias.ToList();
-            return ListGalerias;
+            return await _db.Galerias.ToListAsync();
         }
 
         public void Save()

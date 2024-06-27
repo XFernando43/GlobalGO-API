@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,15 +34,14 @@ namespace data.repository
             throw new NotImplementedException();
         }
 
-        public List<Carruseles> getCarousels()
-        {
-            List<Carruseles> carrouselesList = _db.Carruseles.ToList();
-            return carrouselesList;
-        }
-
         public void deleteCarousel(int id)
         {
             throw new NotImplementedException();
+        }
+
+        public async Task<IEnumerable<Carruseles>> GetCarruseles()
+        {
+            return await _db.Carruseles.ToListAsync();
         }
     }
 }

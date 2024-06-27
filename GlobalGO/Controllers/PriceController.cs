@@ -20,7 +20,7 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                List<Precios> listBrands = _unitOfWork.priceRepository.getPrices();
+                var listBrands = _unitOfWork.priceRepository.getPrices();
                 return Ok(new
                 {
                     Ok = true,

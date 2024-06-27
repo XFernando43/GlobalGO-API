@@ -13,8 +13,16 @@ namespace service
 
         public async Task<IEnumerable<Modelos>> getModelos()
         {
-            var modelos = await _unitOfWork.modelRepository.getModels();
-            return modelos;
+            try
+            {
+                var modelos = await _unitOfWork.modelRepository.getModels();
+                return modelos;
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
+
         }
         
     }

@@ -19,7 +19,7 @@ namespace GlobalGO.Controllers
         async public Task<IActionResult> Get(){
             try
             {
-                List<Distribuidores> listDealers = _unitOfWork.dealersRepository.GetDealers();
+                var listDealers = _unitOfWork.dealersRepository.GetDealers();
                 return Ok(new
                 {
                     Ok = true,

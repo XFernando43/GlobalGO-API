@@ -9,7 +9,8 @@ namespace data.repository.interfaces
         void AddColor();
         void Update();
         void Save();
-        List<Colores> getColors();
+        //List<Colores> getColors();
+        Task<IEnumerable<Colores>> getColors();
         void deleteColor(int id);
     }
 }

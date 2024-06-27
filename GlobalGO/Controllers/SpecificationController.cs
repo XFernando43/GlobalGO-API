@@ -21,7 +21,7 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                List<Especificaciones> listSpecifications = _unitOfWork.specificationRepository.getSpecifications();
+                var listSpecifications = _unitOfWork.specificationRepository.getSpecifications();
                 return Ok(new
                 {
                     Ok = true,

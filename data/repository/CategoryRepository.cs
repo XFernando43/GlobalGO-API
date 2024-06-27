@@ -1,8 +1,8 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
+using Microsoft.EntityFrameworkCore;
 using models.request;
-
 
 namespace data.repository
 {
@@ -28,15 +28,15 @@ namespace data.repository
             _db.SaveChanges();
         }
 
-        public void Update(int id, CategoryRequest product)
+        public async void Update(int id, CategoryRequest product)
         {
             throw new NotImplementedException();
+        
         }
 
-        public List<Categorias> getCategories()
+        public async Task<IEnumerable<Categorias>> getCategories()
         {
-            List<Categorias> objList = _db.Categorias.ToList();
-            return objList;
+            return await _db.Categorias.ToListAsync();
         }
     }
 }

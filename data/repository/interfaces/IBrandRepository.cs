@@ -3,12 +3,13 @@ using models.request;
 
 namespace data.repository.interfaces
 {
-    public partial interface IBrandRepository: IRepository<Marcas>
+    public partial interface IBrandRepository : IRepository<Marcas>
     {
         void AddBrand();
         void Update();
         void Save();
-        List<Marcas> getBrands();
+        //List<Marcas> getBrands();
+        Task<IEnumerable<Marcas>> getBrands();
         void deleteBrand(int id);
     }
 }

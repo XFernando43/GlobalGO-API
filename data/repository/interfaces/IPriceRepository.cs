@@ -12,7 +12,7 @@ namespace data.repository.interfaces
         void AddPrice();
         void Update();
         void Save();
-        List<Precios> getPrices();
+        Task<IEnumerable<Precios>> getPrices();
         void deletePrices(int id);
     }
 
