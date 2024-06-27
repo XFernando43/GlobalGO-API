@@ -12,7 +12,7 @@ namespace data.repository.interfaces
         void AddDealerXMoto();
         void Update();
         void Save();
-        Task<IEnumerable<DistribuidorMotos>> getDealersXMoto();
+        Task<IEnumerable<DistribuidorMotos>> getAllDealersXMoto();
         void deleteDealerXMoto(int id);
     }
 }

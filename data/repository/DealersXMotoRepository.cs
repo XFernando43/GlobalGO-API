@@ -28,7 +28,7 @@ namespace data.repository
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<DistribuidorMotos>> getDealersXMoto()
+        public async Task<IEnumerable<DistribuidorMotos>> getAllDealersXMoto()
         {
             return await _db.DistribuidoresMotos.ToListAsync();
         }

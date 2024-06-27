@@ -1,15 +1,17 @@
 ﻿using data.repository.interfaces;
-using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
+using service;
 
 namespace GlobalGO.Controllers
 {
     public class BrandController : Controller
     {
-       private readonly IUnitOfWork _unitOfWork;
+        private readonly IUnitOfWork _unitOfWork;
+        private readonly BrandService _brandService;
         public BrandController(IUnitOfWork unitOfWork)
         {
             _unitOfWork = unitOfWork;
+            _brandService = new BrandService(_unitOfWork);
         }
 
 
@@ -18,7 +20,7 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                var listBrands = _unitOfWork.brandRepository.getBrands();
+                var listBrands = await _brandService.getMarcas();
                 return Ok(new
                 {
                     Ok = true,
@@ -30,8 +32,8 @@ namespace GlobalGO.Controllers
                 Console.WriteLine(ex.Message);
                 return BadRequest(new
                 {
-                    ok=false,
-                    message=ex.Message
+                    ok = false,
+                    message = ex.Message
                 });
             }
         }
