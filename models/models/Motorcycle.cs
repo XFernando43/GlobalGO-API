@@ -19,10 +19,16 @@
         public string Transmision { get; set; }
         public string Velocidad { get; set; }
         public string Suspension_delantero { get; set; }
+        public string Suspension_posterior { get; set; }
         public string Peso { get; set; }
         public string Carga { get; set; }
         public string Largo { get; set; }
         public string Ancho { get; set; }
         public string Alto { get; set; }
+        public string Texto { get; set; }
+        public string Categoria { get; set; }
+        public string Icono { get; set; }
+        public string Freno_delantero { get; set; }
+        public string Freno_posterior { get; set; }
     }
 }
