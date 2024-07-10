@@ -18,6 +18,7 @@ namespace data.repository
         public ISpecificationRepository specificationRepository {get; set; }
         public IGaleryRepository galeryRepository { get; set; }
         public IDealersXModelRepository dealersXModelRepository { get; set; }
+        public IMotorcycleRepository motorcycleRepository { get; set; }
 
         public UnitOfWork(ApplicationDbContext db)
         {
@@ -32,6 +33,7 @@ namespace data.repository
             specificationRepository = new SpecificationRepository(_db);
             galeryRepository = new GaleryRepository(_db);
             dealersXModelRepository = new DealersXMotoRepository(db);
+            motorcycleRepository = new MotorcycleRepository(_db);
         }
 
         public void Save()

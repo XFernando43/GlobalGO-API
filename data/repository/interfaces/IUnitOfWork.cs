@@ -18,6 +18,7 @@ namespace data.repository.interfaces
         IPriceRepository priceRepository { get; set; }
         ISpecificationRepository specificationRepository { get; set; }
         IDealersXModelRepository dealersXModelRepository { get; set; }
+        IMotorcycleRepository motorcycleRepository { get; set; }
         void Save();
     }
 }

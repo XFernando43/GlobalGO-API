@@ -1,5 +1,7 @@
 ﻿using data.repository.interfaces;
+using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
+using models.request;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -49,8 +51,16 @@ namespace GlobalGO.Controllers
         }
 
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] Modelos model)
         {
+            try
+            {
+                _service.insertModel(model);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("Error mientras se guardo el dato");
+            }
         }
 
         [HttpPost("excel")]
@@ -61,7 +71,8 @@ namespace GlobalGO.Controllers
             {
                 await _service.SubmitDataByExcel(archivoExcel);
             }
-            catch (Exception ex) { 
+            catch (Exception ex)
+            {
                 throw new Exception("Algo ocurrio en el servidor");
             }
         }

@@ -4,6 +4,7 @@ using data.repository.interfaces;
 using GlobalGO.data;
 using GlobalGO.models;
 using Microsoft.EntityFrameworkCore;
+using models.request;
 
 namespace data.repository
 {
@@ -15,9 +16,9 @@ namespace data.repository
             _db = db;
         }
 
-        public void AddModels()
+        public void AddModels(Modelos model)
         {
-            throw new NotImplementedException();
+            _db.Modelos.Add(model);
         }
 
         public void deleteModel(int id)

@@ -1,6 +1,7 @@
-﻿using data.repository.interfaces;
+﻿using Dapper;
+using GlobalGO.models;
 using Microsoft.AspNetCore.Mvc;
-using service;
+using Microsoft.Data.SqlClient;
 
 namespace GlobalGO.Controllers
 {
@@ -8,35 +9,29 @@ namespace GlobalGO.Controllers
     [ApiController]
     public class BrandController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly BrandService _brandService;
-        public BrandController(IUnitOfWork unitOfWork)
+        private readonly IConfiguration _configuration;
+
+        public BrandController(IConfiguration configuration)
         {
-            _unitOfWork = unitOfWork;
-            _brandService = new BrandService(_unitOfWork);
+            _configuration = configuration;
         }
 
 
         [HttpGet("getAll")]
-        public async Task<IActionResult> getBrands()
+        public async Task<IEnumerable<Marcas>> getBrands()
         {
             try
             {
-                var listBrands = await _brandService.getMarcas();
-                return Ok(new
-                {
-                    Ok = true,
-                    brands = listBrands
-                });
+                var query = @"SELECT* FROM Marcas";
+
+                using var connection = new SqlConnection(_configuration.GetConnectionString("DafultConnection"));
+                var motorcycles = await connection.QueryAsync<Marcas>(query);
+                return motorcycles;
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new
-                {
-                    ok = false,
-                    message = "Se produjo un error interno del servidor.",
-                    error = ex.Message
-                });
+                Console.WriteLine(ex.Message);
+                return null;
             }
         }
     }

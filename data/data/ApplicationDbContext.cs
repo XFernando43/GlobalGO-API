@@ -1,5 +1,6 @@
 ﻿using GlobalGO.models;
 using Microsoft.EntityFrameworkCore;
+using models.models;
 
 
 namespace GlobalGO.data
@@ -21,6 +22,7 @@ namespace GlobalGO.data
             public DbSet<Modelos> Modelos { get; set; }
             public DbSet<Precios> Precios { get; set; }
             public DbSet<DistribuidorMotos> DistribuidoresMotos { get; set; }
+        public DbSet<Motorcycle> motorcycles { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

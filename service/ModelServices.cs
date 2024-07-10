@@ -1,6 +1,7 @@
 ﻿using data.repository.interfaces;
 using GlobalGO.models;
 using Microsoft.AspNetCore.Http;
+using models.request;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
@@ -27,7 +28,17 @@ namespace service
                 Console.WriteLine(ex.Message);
                 return null;
             }
+        }
 
+        public async void insertModel(Modelos model)
+        {
+            try
+            {
+               _unitOfWork.modelRepository.AddModels(model);
+            }
+            catch (Exception ex) {
+                throw new Exception("Error ocurrido durante la inserccion del dato");
+            }
         }
 
         public async Task SubmitDataByExcel(IFormFile archivoExcel)
@@ -66,6 +77,11 @@ namespace service
                             continue; // Salta filas vacías
                         }
                         Console.WriteLine($"{fila.GetCell(0).ToString()} {fila.GetCell(1).ToString()} {fila.GetCell(2).ToString()} {fila.GetCell(3).ToString()}");
+                        //_unitOfWork.modelRepository.Add(new ModelRequest
+                        //{
+                        //    IdMarca = 1,
+                            
+                        //})
                     }
                 }
             }
