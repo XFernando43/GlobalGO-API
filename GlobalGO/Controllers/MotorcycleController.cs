@@ -23,16 +23,18 @@ namespace GlobalGO.Controllers
             {
                 var query = @"
                           Select MO.IdModelo,MO.Modelo,MO.RGB,MO.Precio,
-	                       MA.Logo,MA.Marca,ESP.Imagen,
-	                       ESP.Cilindrada,ESP.Potencia,ESP.Torque,ESP.Combustible,ESP.Tanque,ESP.Rendimiento,ESP.Autonomia, 
-	                       ESP.Transmision,ESP.Velocidad,ESP.Suspension_delantero,ESP.Peso,ESP.Carga,ESP.Largo,ESP.Ancho,
-	                       ESP.Alto, MO.Texto, CA.Categoria, CA.Icono, ESP.Freno_delantero,ESP.Freno_posterior, 
-	                       ESP.Suspension_delantero, ESP.Suspension_posterior
-                           from Modelos AS MO
-                           INNEr JOIN Marcas AS MA ON MO.IdMarca = MA.IdMarca
-                           INNER JOIN Especificaciones AS ESP ON ESP.IdModelo = MO.IdModelo
-                           INNER JOIN Carruseles as CAR ON CAR.IdModelo = MO.IdModelo
-		                    INNER JOIN Categorias AS CA ON CA.IdCategoria = MO.IdCategoria";
+                         MA.Logo,MA.Marca,ESP.Imagen,
+                         ESP.Cilindrada,ESP.Potencia,ESP.Torque,ESP.Combustible,ESP.Tanque,ESP.Rendimiento,ESP.Autonomia, 
+                         ESP.Transmision,ESP.Velocidad,ESP.Suspension_delantero,ESP.Peso,ESP.Carga,ESP.Largo,ESP.Ancho,
+                         ESP.Alto, MO.Texto, CA.Categoria, CA.Icono, ESP.Freno_delantero,ESP.Freno_posterior, 
+                         ESP.Suspension_delantero, ESP.Suspension_posterior
+                         from Modelos AS MO
+                         INNEr JOIN Marcas AS MA ON MO.IdMarca = MA.IdMarca
+                         INNER JOIN Especificaciones AS ESP ON ESP.IdModelo = MO.IdModelo
+                         --INNER JOIN Carruseles as CAR ON CAR.IdModelo = MO.IdModelo
+                          INNER JOIN Categorias AS CA ON CA.IdCategoria = MO.IdCategoria
+                          ORDER BY 4 DESC
+                            ";
 
                 using var connection = new SqlConnection(_configuration.GetConnectionString("DafultConnection"));
                 var motorcycles = await connection.QueryAsync<Motorcycle>(query);
@@ -50,7 +52,8 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                var query = @" Select MO.IdModelo,MO.Modelo,MO.RGB,MO.Precio,
+                var query = @" 
+                           Select MO.IdModelo,MO.Modelo,MO.RGB,MO.Precio,
 	                       MA.Logo,MA.Marca,ESP.Imagen,
 	                       ESP.Cilindrada,ESP.Potencia,ESP.Torque,ESP.Combustible,ESP.Tanque,ESP.Rendimiento,ESP.Autonomia, 
 	                       ESP.Transmision,ESP.Velocidad,ESP.Suspension_delantero,ESP.Peso,ESP.Carga,ESP.Largo,ESP.Ancho,
@@ -59,7 +62,7 @@ namespace GlobalGO.Controllers
                            from Modelos AS MO
                               INNER JOIN Marcas AS MA ON MO.IdMarca = MA.IdMarca
                               INNER JOIN Especificaciones AS ESP ON ESP.IdModelo = MO.IdModelo
-                              INNER JOIN Carruseles as CAR ON CAR.IdModelo = MO.IdModelo
+                              --INNER JOIN Carruseles as CAR ON CAR.IdModelo = MO.IdModelo
                               INNER JOIN Categorias AS CA ON CA.IdCategoria = MO.IdCategoria
                               WHERE MO.IdModelo = @Id";
 

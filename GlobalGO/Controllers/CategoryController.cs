@@ -1,8 +1,8 @@
-﻿using data.repository.interfaces;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
+using models.models;
+using Dapper;
 using GlobalGO.models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata;
-using service;
 
 namespace GlobalGO.Controllers
 {
@@ -10,34 +10,27 @@ namespace GlobalGO.Controllers
     [ApiController]
     public class CategoryController : Controller
     {
-        private readonly IUnitOfWork _unitOfWork;
-        private readonly CategoryService _categoryService;
-        public CategoryController(IUnitOfWork unitOfWork)
+        private readonly IConfiguration _configuration;
+        public CategoryController(IConfiguration configuration)
         {
-            _unitOfWork = unitOfWork;
-            _categoryService = new CategoryService(unitOfWork);
+            _configuration = configuration;
         }
 
         [HttpGet("getAll")]
-        public async Task<IActionResult> getCategories()
+        public async Task<IEnumerable<Categorias>> getCategories()
         {
             try
             {
-                var listCategorias = _unitOfWork.categoryRepository.getCategories();
-                return Ok(new
-                {
-                    Ok = true,
-                    categorias = listCategorias
-                });
+                var query = @"SELECT* FROM Categorias";
+
+                using var connection = new SqlConnection(_configuration.GetConnectionString("DafultConnection"));
+                var categories = await connection.QueryAsync<Categorias>(query);
+                return categories;
             }
             catch (Exception ex)
             {
-                return StatusCode(500, new
-                {
-                    ok = false,
-                    message = "Se produjo un error interno del servidor.",
-                    error = ex.Message
-                });
+                Console.WriteLine(ex.Message);
+                return null;
             }
         }
 

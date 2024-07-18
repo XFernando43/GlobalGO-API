@@ -30,5 +30,6 @@
         public string Icono { get; set; }
         public string Freno_delantero { get; set; }
         public string Freno_posterior { get; set; }
+        public string ModelIcon { get; set; }  
     }
 }
