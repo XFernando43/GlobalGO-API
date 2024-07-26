@@ -5,12 +5,6 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GlobalGO", "GlobalGO\GlobalGO.csproj", "{647DB908-47BC-4395-9043-20955FADB48D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "data", "data\data.csproj", "{02A2552B-5697-4C29-8EAE-D1D282214364}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "models", "models\models.csproj", "{C23D99E1-2AA1-4AE0-AFC9-7C5A93E9F26D}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "service", "service\service.csproj", "{D8E61528-C8A0-457C-9B31-29EF7B52D338}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,18 +15,6 @@ Global
 		{647DB908-47BC-4395-9043-20955FADB48D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{647DB908-47BC-4395-9043-20955FADB48D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{647DB908-47BC-4395-9043-20955FADB48D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{02A2552B-5697-4C29-8EAE-D1D282214364}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{02A2552B-5697-4C29-8EAE-D1D282214364}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{02A2552B-5697-4C29-8EAE-D1D282214364}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{02A2552B-5697-4C29-8EAE-D1D282214364}.Release|Any CPU.Build.0 = Release|Any CPU
-		{C23D99E1-2AA1-4AE0-AFC9-7C5A93E9F26D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C23D99E1-2AA1-4AE0-AFC9-7C5A93E9F26D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C23D99E1-2AA1-4AE0-AFC9-7C5A93E9F26D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C23D99E1-2AA1-4AE0-AFC9-7C5A93E9F26D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D8E61528-C8A0-457C-9B31-29EF7B52D338}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D8E61528-C8A0-457C-9B31-29EF7B52D338}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D8E61528-C8A0-457C-9B31-29EF7B52D338}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D8E61528-C8A0-457C-9B31-29EF7B52D338}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

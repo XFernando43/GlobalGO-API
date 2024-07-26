@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
-using models.models;
-using Dapper;
-using GlobalGO.models;
+﻿using GlobalGO.models;
 using GlobalGO.services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace GlobalGO.Controllers
 {

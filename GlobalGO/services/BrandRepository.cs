@@ -22,9 +22,7 @@ namespace GlobalGO.services
             }
             catch (Exception ex)
             {
-                // Puedes usar un mecanismo de logging en lugar de Console.WriteLine
                 Console.WriteLine($"Error al ejecutar la consulta: {ex.Message}");
-                // O puedes lanzar la excepción para que sea manejada por el llamador
                 throw;
             }
         }

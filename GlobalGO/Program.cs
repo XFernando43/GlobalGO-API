@@ -3,9 +3,7 @@
 //using GlobalGO.data;
 //using Microsoft.EntityFrameworkCore;
 
-using GlobalGO.data;
 using GlobalGO.services;
-using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,16 +11,16 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 
 // Configurar la conexión a la base de datos
-builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
-    builder.Configuration.GetConnectionString("DefaultConnection")
-));
+//builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(
+//    builder.Configuration.GetConnectionString("DefaultConnection")
+//));
 
 // Configurar inyección de dependencias
 //builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
-builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
-builder.Services.AddScoped<IBrandRepository,BrandRepository>();
-builder.Services.AddScoped<IMotorcycleRepository,MotorcycleRepository>();
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<IBrandRepository, BrandRepository>();
+builder.Services.AddScoped<IMotorcycleRepository, MotorcycleRepository>();
 
 // Configurar política CORS
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
