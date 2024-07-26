@@ -1,6 +1,5 @@
-﻿using Dapper;
+﻿using GlobalGO.services;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using models.models;
 
 namespace GlobalGO.Controllers
@@ -10,10 +9,12 @@ namespace GlobalGO.Controllers
     public class MotorcycleController : Controller
     {
         private readonly IConfiguration _configuration;
+        private readonly IMotorcycleRepository _motorcycleRepository;
 
-        public MotorcycleController(IConfiguration configuration)
+        public MotorcycleController(IConfiguration configuration, IMotorcycleRepository motorcycleRepo)
         {
             _configuration = configuration;
+            _motorcycleRepository = motorcycleRepo;
         }
 
         [HttpGet("getMotorcycles")]
@@ -21,24 +22,8 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                var query = @"
-                          Select MO.IdModelo,MO.Modelo,MO.RGB,MO.Precio,
-                         MA.Logo,MA.Marca,ESP.Imagen,
-                         ESP.Cilindrada,ESP.Potencia,ESP.Torque,ESP.Combustible,ESP.Tanque,ESP.Rendimiento,ESP.Autonomia, 
-                         ESP.Transmision,ESP.Velocidad,ESP.Suspension_delantero,ESP.Peso,ESP.Carga,ESP.Largo,ESP.Ancho,
-                         ESP.Alto, MO.Texto, CA.Categoria, CA.Icono, ESP.Freno_delantero,ESP.Freno_posterior, 
-                         ESP.Suspension_delantero, ESP.Suspension_posterior
-                         from Modelos AS MO
-                         INNEr JOIN Marcas AS MA ON MO.IdMarca = MA.IdMarca
-                         INNER JOIN Especificaciones AS ESP ON ESP.IdModelo = MO.IdModelo
-                         --INNER JOIN Carruseles as CAR ON CAR.IdModelo = MO.IdModelo
-                          INNER JOIN Categorias AS CA ON CA.IdCategoria = MO.IdCategoria
-                          ORDER BY 4 DESC
-                            ";
-
-                using var connection = new SqlConnection(_configuration.GetConnectionString("DafultConnection"));
-                var motorcycles = await connection.QueryAsync<Motorcycle>(query);
-                return motorcycles;
+                var result = await _motorcycleRepository.GetMotorcycles(_configuration.GetConnectionString("DefaultConnection"));
+                return result;
             }
             catch (Exception ex)
             {
@@ -52,23 +37,8 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                var query = @" 
-                           Select MO.IdModelo,MO.Modelo,MO.RGB,MO.Precio,
-	                       MA.Logo,MA.Marca,ESP.Imagen,
-	                       ESP.Cilindrada,ESP.Potencia,ESP.Torque,ESP.Combustible,ESP.Tanque,ESP.Rendimiento,ESP.Autonomia, 
-	                       ESP.Transmision,ESP.Velocidad,ESP.Suspension_delantero,ESP.Peso,ESP.Carga,ESP.Largo,ESP.Ancho,
-	                       ESP.Alto, MO.Texto, CA.Categoria, CA.Icono, ESP.Freno_delantero,ESP.Freno_posterior, 
-	                       ESP.Suspension_delantero, ESP.Suspension_posterior
-                           from Modelos AS MO
-                              INNER JOIN Marcas AS MA ON MO.IdMarca = MA.IdMarca
-                              INNER JOIN Especificaciones AS ESP ON ESP.IdModelo = MO.IdModelo
-                              --INNER JOIN Carruseles as CAR ON CAR.IdModelo = MO.IdModelo
-                              INNER JOIN Categorias AS CA ON CA.IdCategoria = MO.IdCategoria
-                              WHERE MO.IdModelo = @Id";
-
-                using var connection = new SqlConnection(_configuration.GetConnectionString("DafultConnection"));
-                var motorcycle = await connection.QueryFirstOrDefaultAsync<Motorcycle>(query, new { Id = id });
-                return motorcycle;
+                var result = await _motorcycleRepository.GetMotorcycle(_configuration.GetConnectionString("DefaultConnection"), id);
+                return result;
             }
             catch (Exception ex)
             {
@@ -76,7 +46,5 @@ namespace GlobalGO.Controllers
                 return null;
             }
         }
-
-
     }
 }

@@ -3,6 +3,7 @@ using Microsoft.Data.SqlClient;
 using models.models;
 using Dapper;
 using GlobalGO.models;
+using GlobalGO.services;
 
 namespace GlobalGO.Controllers
 {
@@ -11,9 +12,11 @@ namespace GlobalGO.Controllers
     public class CategoryController : Controller
     {
         private readonly IConfiguration _configuration;
-        public CategoryController(IConfiguration configuration)
+        private readonly ICategoryRepository _categoryRepository;
+        public CategoryController(IConfiguration configuration, ICategoryRepository categoryRepository)
         {
             _configuration = configuration;
+            _categoryRepository = categoryRepository;
         }
 
         [HttpGet("getAll")]
@@ -21,11 +24,8 @@ namespace GlobalGO.Controllers
         {
             try
             {
-                var query = @"SELECT* FROM Categorias";
-
-                using var connection = new SqlConnection(_configuration.GetConnectionString("DafultConnection"));
-                var categories = await connection.QueryAsync<Categorias>(query);
-                return categories;
+                var result = await _categoryRepository.GetCategories(_configuration.GetConnectionString("DefaultConnection"));
+                return result;
             }
             catch (Exception ex)
             {

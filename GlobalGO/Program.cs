@@ -1,6 +1,10 @@
-using data.repository;
-using data.repository.interfaces;
+//using data.repository;
+//using data.repository.interfaces;
+//using GlobalGO.data;
+//using Microsoft.EntityFrameworkCore;
+
 using GlobalGO.data;
+using GlobalGO.services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +18,11 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 ));
 
 // Configurar inyección de dependencias
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
+builder.Services.AddScoped<IBrandRepository,BrandRepository>();
+builder.Services.AddScoped<IMotorcycleRepository,MotorcycleRepository>();
 
 // Configurar política CORS
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
