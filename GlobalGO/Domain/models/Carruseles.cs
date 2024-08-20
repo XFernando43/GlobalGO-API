@@ -10,24 +10,11 @@ namespace GlobalGO.models
 {
     public class Carruseles
     {
-        [Key]
-        public int idCarrusel { get; set; }
-
-        [ForeignKey("Modelo")]
-        public int idModelo { get; set; }
-        public Modelos modelo { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string imagen { get; set; }
-
-        [MaxLength(60)]
-        public string titulo { get; set; }
-
-        [MaxLength(60)]
-        public string texto1 { get; set; }
-
-        [MaxLength(60)]
-        public string texto2 { get; set; }
+        public int IdCarrusel { get; set; }
+        public int IdModelo { get; set; }
+        public string Imagen { get; set; }
+        public string Titulo { get; set; }
+        public string Texto1 { get; set; }
+        public string Texto2 { get; set; }
     }
 }

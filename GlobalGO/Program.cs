@@ -21,6 +21,7 @@ builder.Services.AddControllers();
 builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 builder.Services.AddScoped<IBrandRepository, BrandRepository>();
 builder.Services.AddScoped<IMotorcycleRepository, MotorcycleRepository>();
+builder.Services.AddScoped<ICarruselRepository, CarruselRepository>();
 
 // Configurar política CORS
 var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
