@@ -10,18 +10,9 @@ namespace GlobalGO.models
 {
     public partial class Colores
     {
-        [Key]
-        public int idColor { get; set; }
-
-        [ForeignKey("modelo")]
-        public int idModelo { get; set; }
-        public Modelos modelo { get; set; }
-
-        [Required]
-        [MaxLength(50)]
-        public string color { get; set; }
-
-        [MaxLength(20)]
-        public string icono { get; set; }
+        public string Modelo { get; set; }
+        public string name_color {  get; set; }
+        public string hex1 { get; set; }
+        public string hex2 { get; set; }
     }
 }
