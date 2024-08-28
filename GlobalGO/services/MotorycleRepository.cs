@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using GlobalGO.models;
 using Microsoft.Data.SqlClient;
 using models.models;
 
@@ -22,9 +23,22 @@ namespace GlobalGO.services
                     INNER JOIN Especificaciones AS ESP ON ESP.IdModelo = MO.IdModelo
                     INNER JOIN Categorias AS CA ON CA.IdCategoria = MO.IdCategoria
                     WHERE MO.IdModelo = @Id";
+                
+                var sqlColors = @"
+                     SELECT M.Modelo, C.name_color,C.hex1,C.hex2
+                     FROM dbo.Modelos AS M
+                     INNER JOIN dbo.ModeloXColor AS MC ON MC.modelo_id = M.IdModelo
+                     INNER JOIN dbo.Color AS C ON C.id = MC.color_id
+                     WHERE M.IdModelo = @Id;
+                ";
+
 
                 using var connection = new SqlConnection(sqlConexion);
                 var motorcycle = await connection.QueryFirstOrDefaultAsync<Motorcycle>(query, new { Id = id });
+                var colors = await connection.QueryAsync<Colores>(sqlColors, new { Id = id });
+                motorcycle.Colores = colors.ToList();
+
+
                 return motorcycle;
             }
             catch (Exception ex)
