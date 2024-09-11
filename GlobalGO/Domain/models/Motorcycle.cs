@@ -33,8 +33,9 @@ namespace models.models
         public string Freno_delantero { get; set; }
         public string Freno_posterior { get; set; }
         public string ModelIcon { get; set; }  
-        
         public List<Colores> Colores { get; set; } = new List<Colores>();
+        public List<Carruseles> carrusels { get; set; } = new List<Carruseles>();
+        
 
     }
 }

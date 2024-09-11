@@ -23,7 +23,7 @@ namespace GlobalGO.services
                     INNER JOIN Especificaciones AS ESP ON ESP.IdModelo = MO.IdModelo
                     INNER JOIN Categorias AS CA ON CA.IdCategoria = MO.IdCategoria
                     WHERE MO.IdModelo = @Id";
-                
+
                 var sqlColors = @"
                      SELECT M.Modelo, C.name_color,C.hex1,C.hex2
                      FROM dbo.Modelos AS M
@@ -32,12 +32,18 @@ namespace GlobalGO.services
                      WHERE M.IdModelo = @Id;
                 ";
 
+                var sqlCarruseles = @"SELECT *
+                    FROM dbo.Carruseles
+                    WHERE IdModelo = @Id";
+
 
                 using var connection = new SqlConnection(sqlConexion);
                 var motorcycle = await connection.QueryFirstOrDefaultAsync<Motorcycle>(query, new { Id = id });
                 var colors = await connection.QueryAsync<Colores>(sqlColors, new { Id = id });
-                motorcycle.Colores = colors.ToList();
+                var carruseles = await connection.QueryAsync<Carruseles>(sqlCarruseles, new { Id = id });
 
+                motorcycle.Colores = colors.ToList();
+                motorcycle.carrusels = carruseles.ToList();
 
                 return motorcycle;
             }
